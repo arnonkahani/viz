@@ -5,7 +5,7 @@ L.HexLayer = L.Class.extend({
         minZoom: 0,
         maxZoom: 18,
         padding: 100,
-        radius: 20
+        radius: 25
     },
     hour: 6,
     day:1,
@@ -45,11 +45,8 @@ mouseout : function(tooltip) { return function(d){
 
     onAdd: function (map) {
         this._map = map;
-
-        // Create a container for svg.
         this._initContainer();
 
-        // Set up events
         map.on({
             'moveend': this._update
         }, this);
@@ -76,7 +73,6 @@ mouseout : function(tooltip) { return function(d){
     _initContainer: function () {
         var overlayPane = this._map.getPanes().overlayPane;
         if (!this._container || overlayPane.empty) {
-            // TODO: Add optional ID attribute in the case of multiple layers.
             this._container = d3.select(overlayPane)
                 .append('svg').attr('class', 'leaflet-layer leaflet-zoom-hide');
         }
@@ -143,14 +139,11 @@ mouseout : function(tooltip) { return function(d){
         var bins = layout(data)
         var hexagons = container.selectAll(".hexagon").data(bins);
 
-        // Create hexagon elements when data is added.
         var path = hexagons.enter().append("path").attr("class", "hexagon")
   
         this._applyStyle(path);
 
-        // Position hexagon elements.
         hexagons.attr("d", function (d) {
-            // Setting "M" ensures each hexagon is drawn at its correct location.
             return "M" + d.x + "," + d.y + layout.hexagon();
         });
 

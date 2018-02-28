@@ -71,9 +71,6 @@ div.tooltip:before {
 <label class="control">Aniamte
 <input id="animate_select" type="checkbox">
 </label>
-<label class="control">Radius
-<input id="radius_select" type="range" min="5" max="80" step="1" >
-</label>
 
 <label class="control">Save config
 <input id="save_button" type="button">
@@ -109,13 +106,10 @@ div.tooltip:before {
 
 
           function hex_style(hexagons) {
-              // Maintain a density scale relative to initial zoom level.
-              if (!(max && scale) || true) {
                   max = d3.max(hexagons.data(), function (d) { return d.length; });
                   scale = d3.scale.quantize()
                           .domain([max, max/2,0])
                           .range(d3.range(classes));
-              }
               hexagons
                   .attr("stroke", scheme[classes - 1])
                   .attr("fill", function (d) {
@@ -129,32 +123,16 @@ div.tooltip:before {
               "animate":document.getElementById("animate_select").checked,
               "hour":document.getElementById("hour_select").value,
               "day":document.getElementById("day_select").value,
-              "radius":document.getElementById("radius_select").value,
             }
             map._layers[16].activateNewConfig(new_config)
 
           }
 
-          // function hex_style(hexagons) {
-          //     // Maintain a density scale relative to initial zoom level.
-          //     if (!(max && scale) || true) {
-          //         max = d3.max(hexagons.data(), function (d) { return d.length; });
-          //         console.log(max)
-          //         scale = d3.scale.linear()
-          //                 .domain([max,0])
-          //                 .range(["red", "green"]);
-          //     }
-          //     hexagons
-          //         .attr("stroke", scheme[classes - 1])
-          //         .attr("fill", function (d) {
-          //             return scale(d.length);
-          //         });
-          // }
 
 
       ;
 
-      //The color of each hexagon
+    
 
     </script>
   </body>
